@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Movie — 15 सेकंड प्रतीक्षा करें</title>
+  <meta name="description" content="मूवी पाने के लिए 15 सेकंड प्रतीक्षा करें।">
+  <style>
+    :root{color-scheme:dark;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:#070912;color:#f3f5ff}
+    *{box-sizing:border-box}body{margin:0;min-width:320px;background:#070912}
+    .page{position:relative;width:min(100%,480px);min-height:100svh;margin:auto;overflow:hidden;border-inline:1px solid #24253b;background:radial-gradient(ellipse at 50% -12%,#6e4cff31,transparent 42%),radial-gradient(ellipse at 0% 72%,#e659a51c,transparent 34%),linear-gradient(165deg,#15152b 0%,#0a0c19 60%,#070912 100%);box-shadow:0 0 100px #02030b}
+    .page:before{content:"";position:absolute;z-index:5;top:0;left:7%;right:7%;height:1px;background:linear-gradient(90deg,transparent,#a58bff,#70e9d6,transparent);box-shadow:0 0 18px #9d84ff88}
+    .grain{position:fixed;inset:0;z-index:8;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+    header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:20px}
+    .brand{display:flex;align-items:center;gap:11px;color:#f3f5ff;font-size:13px;font-weight:700;letter-spacing:.25em;text-decoration:none}
+    .brand-mark{display:grid;place-items:center;width:36px;height:36px;border:1px solid #a58bff88;border-radius:13px;color:#c0b1ff;background:#a58bff18;box-shadow:inset 0 0 18px #a58bff12}
+    .ready{font:10px ui-monospace,SFMono-Regular,monospace;letter-spacing:.18em;color:#858aa9}.ready i{display:inline-block;width:6px;height:6px;margin-right:8px;border-radius:50%;background:#70e9d6;box-shadow:0 0 12px #70e9d6}
+    main{position:relative;z-index:1;padding:44px 22px 56px;text-align:center}
+    .eyebrow{display:flex;align-items:center;justify-content:center;gap:9px;color:#a58bff;font:10px ui-monospace,SFMono-Regular,monospace;letter-spacing:.22em;text-transform:uppercase}
+    .eyebrow i{display:block;width:24px;height:1px;background:#a58bff88}
+    h1{max-width:350px;margin:28px auto 0;font-size:clamp(2.15rem,10vw,3.8rem);line-height:1.04;letter-spacing:-.065em}
+    h1 span{color:#c8bdff;background:linear-gradient(100deg,#d6cdff,#70e9d6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .timer-wrap{position:relative;display:grid;place-items:center;width:min(72vw,276px);aspect-ratio:1;margin:46px auto 0;border-radius:50%;background:conic-gradient(from -42deg,#70e9d6 0%,#a58bff var(--progress,0%),#262743 var(--progress,0%) 100%);box-shadow:0 0 0 1px #ffffff12,0 0 0 10px #a58bff0b,0 30px 80px #02030c}
+    .timer-wrap:before{content:"";position:absolute;inset:-14px;border:1px solid #a58bff38;border-radius:50%;animation:halo 3s ease-in-out infinite}
+    .timer-wrap:after{content:"";position:absolute;inset:18px;border:1px solid #70e9d62b;border-radius:50%;box-shadow:inset 0 0 28px #70e9d60f}
+    .orbit{position:absolute;z-index:3;border:1px solid #ffffff17;border-radius:50%;pointer-events:none}
+    .orbit.one{inset:-23px;transform:rotate(-22deg)}.orbit.two{inset:-35px;border-color:#70e9d629;transform:rotate(35deg)}
+    .dot{position:absolute;top:50%;right:-3px;width:7px;height:7px;border-radius:50%;background:#a58bff;box-shadow:0 0 15px #a58bff;animation:orbit-dot 4.5s linear infinite}
+    .two .dot{right:auto;left:-3px;width:5px;height:5px;background:#70e9d6;box-shadow:0 0 15px #70e9d6;animation-direction:reverse}
+    .timer-core{position:relative;z-index:1;display:grid;place-items:center;align-content:center;width:calc(100% - 18px);aspect-ratio:1;overflow:hidden;border:1px solid #ffffff1c;border-radius:50%;background:radial-gradient(circle at 50% 34%,#29294a 0%,#17182e 58%,#101122 100%);box-shadow:inset 0 0 36px #a58bff12}
+    .shimmer{position:absolute;inset:-30% 20%;background:linear-gradient(90deg,transparent,#ffffff18,transparent);transform:translateX(-130%) rotate(18deg);animation:shimmer 3.8s ease-in-out infinite}
+    .number{position:relative;font:500 clamp(4rem,15vw,6.6rem)/1 ui-monospace,SFMono-Regular,monospace;letter-spacing:-.12em;text-indent:-.12em;color:#f5f3ff;text-shadow:0 0 28px #a58bff88;animation:number-in .35s cubic-bezier(.22,1,.36,1)}
+    .seconds{position:relative;margin-top:14px;color:#858aa9;font:10px ui-monospace,SFMono-Regular,monospace;letter-spacing:.3em;text-transform:uppercase}
+    .status{margin-top:30px;color:#c8cbe0;font-size:15px}.status b{color:#70e9d6;font-weight:600}
+    .progress{height:5px;margin:34px auto 0;overflow:hidden;border-radius:99px;background:#262743;box-shadow:inset 0 1px 2px #02030c}.progress span{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#a58bff,#70e9d6);box-shadow:0 0 16px #70e9d6;transition:width 1s linear;position:relative}.progress span:after{content:"";position:absolute;inset:0;width:30%;background:#fff8;animation:sheen 1.4s ease-in-out infinite}
+    .percent{margin-top:13px;color:#858aa9;font:10px ui-monospace,SFMono-Regular,monospace;letter-spacing:.2em}
+    .fallback{display:inline-flex;align-items:center;gap:8px;margin-top:30px;color:#a9aec7;font-size:12px;text-decoration:none;border-bottom:1px solid #a58bff44;padding-bottom:4px}.fallback:hover{color:#70e9d6}
+    @keyframes halo{0%,100%{transform:scale(.97);opacity:.35}50%{transform:scale(1.03);opacity:.8}}@keyframes orbit-dot{to{transform:rotate(360deg)}}@keyframes shimmer{0%{transform:translateX(-130%) rotate(18deg);opacity:0}25%,70%{opacity:.7}100%{transform:translateX(130%) rotate(18deg);opacity:0}}@keyframes number-in{from{opacity:.2;transform:translateY(7px) scale(.92)}to{opacity:1;transform:none}}@keyframes sheen{from{transform:translateX(-130%)}to{transform:translateX(350%)}}
+    @media(min-width:640px){body{background:#070912}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="grain"></div>
+    <header><a class="brand" href="index.html"><span class="brand-mark">✦</span>MOVIE</a><span class="ready"><i></i>तैयार</span></header>
+    <main>
+      <div class="eyebrow"><i></i>कृपया प्रतीक्षा करें<i></i></div>
+      <h1>मूवी पाने के लिए<br><span>15 सेकंड</span><br>प्रतीक्षा करें</h1>
+      <div class="timer-wrap" id="timer">
+        <div class="orbit one"><span class="dot"></span></div><div class="orbit two"><span class="dot"></span></div>
+        <div class="timer-core"><div class="shimmer"></div><div class="number" id="number" aria-live="polite">15</div><div class="seconds">सेकंड शेष</div></div>
+      </div>
+      <div class="status" id="status">आपका लिंक तैयार किया जा रहा है<span>...</span></div>
+      <div class="progress"><span id="progress"></span></div>
+      <div class="percent" id="percent">0% पूरा</div>
+      <a class="fallback" href="https://t.me/+CfPhckSNWCI1YjQ1" target="_blank" rel="noreferrer">लिंक न खुले तो यहाँ क्लिक करें ↗</a>
+    </main>
+  </div>
+  <script>
+    const total=15,destination='https://t.me/+CfPhckSNWCI1YjQ1';let left=total;
+    const timerWrap=document.getElementById('timer'),number=document.getElementById('number'),progress=document.getElementById('progress'),percent=document.getElementById('percent'),status=document.getElementById('status');
+    const tick=()=>{left-=1;const done=Math.min(((total-left)/total)*100,100);number.textContent=String(Math.max(left,0)).padStart(2,'0');progress.style.width=done+'%';timerWrap.style.setProperty('--progress',done+'%');percent.textContent=Math.round(done)+'% पूरा';if(left<=0){status.innerHTML='<b>चैनल खोला जा रहा है</b>';clearInterval(timer);window.location.assign(destination)}};
+    const timer=setInterval(tick,1000);
+  </script>
+</body>
+</html>
